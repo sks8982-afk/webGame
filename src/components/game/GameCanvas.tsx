@@ -1,7 +1,7 @@
 // Design Ref: §2.1 — PixiJS Canvas mount, system registration, game wiring
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useGameStore } from "@/stores/gameStore";
 import { useUIStore } from "@/stores/uiStore";
 import { GAME_WIDTH, GAME_HEIGHT } from "@/lib/constants";
@@ -17,6 +17,8 @@ export default function GameCanvas({ stageId, gameRef: externalGameRef }: GameCa
   const gameRef = externalGameRef ?? internalGameRef;
   const gameSpeed = useGameStore((s) => s.gameSpeed);
   const gameState = useGameStore((s) => s.gameState);
+  const [loading, setLoading] = useState(true);
+  const [loadingText, setLoadingText] = useState("게임 엔진 로딩 중...");
 
   useEffect(() => {
     let aborted = false;
@@ -26,6 +28,7 @@ export default function GameCanvas({ stageId, gameRef: externalGameRef }: GameCa
     async function init() {
       if (!canvasRef.current) return;
 
+      setLoadingText("게임 엔진 로딩 중...");
       const { Game } = await import("@/game/core/Game");
       const { AssetLoader } = await import("@/game/core/AssetLoader");
       const { MapRenderer } = await import("@/game/rendering/MapRenderer");
@@ -38,11 +41,13 @@ export default function GameCanvas({ stageId, gameRef: externalGameRef }: GameCa
       const { RenderSystem } = await import("@/game/systems/RenderSystem");
       const { SkillSystem } = await import("@/game/systems/SkillSystem");
 
-      // If component unmounted during dynamic imports, bail out
       if (aborted) return;
 
+      setLoadingText("이미지 로딩 중...");
       await AssetLoader.loadAll();
       if (aborted) return;
+
+      setLoadingText("스테이지 준비 중...");
 
       const game = new Game();
       await game.init(canvasRef.current!, GAME_WIDTH, GAME_HEIGHT);
@@ -138,9 +143,13 @@ export default function GameCanvas({ stageId, gameRef: externalGameRef }: GameCa
       game.start();
       gameInstance = game;
       gameRef.current = game;
+      setLoading(false);
     }
 
-    init();
+    init().catch((err) => {
+      console.error("Game init failed:", err);
+      setLoadingText("로딩 실패. 새로고침해주세요.");
+    });
 
     return () => {
       aborted = true;
@@ -174,10 +183,27 @@ export default function GameCanvas({ stageId, gameRef: externalGameRef }: GameCa
   }, [gameState]);
 
   return (
-    <div
-      ref={canvasRef}
-      style={{ width: GAME_WIDTH, height: GAME_HEIGHT }}
-      className="relative border-2 border-gray-700 bg-gray-900 overflow-hidden"
-    />
+    <div className="relative" style={{ width: GAME_WIDTH, height: GAME_HEIGHT }}>
+      <div
+        ref={canvasRef}
+        style={{ width: GAME_WIDTH, height: GAME_HEIGHT }}
+        className="border-2 border-gray-700 bg-gray-900 overflow-hidden"
+      />
+
+      {loading && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-950/95 z-30">
+          {/* Animated spinner */}
+          <div className="relative w-16 h-16 mb-4">
+            <div className="absolute inset-0 rounded-full border-4 border-gray-700" />
+            <div className="absolute inset-0 rounded-full border-4 border-t-yellow-400 border-r-transparent border-b-transparent border-l-transparent animate-spin" />
+          </div>
+          <div className="text-yellow-400 text-lg font-bold mb-1">로딩 중</div>
+          <div className="text-gray-400 text-sm animate-pulse">{loadingText}</div>
+          <div className="mt-6 text-gray-600 text-xs max-w-md text-center px-4">
+            처음 로딩 시 이미지와 BGM 등 에셋을 모두 받아오는 데 시간이 걸릴 수 있습니다.
+          </div>
+        </div>
+      )}
+    </div>
   );
 }

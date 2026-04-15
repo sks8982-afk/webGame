@@ -44,6 +44,8 @@ class BgmManager {
   private audio: HTMLAudioElement | null = null;
   private settings: BgmSettings = loadSettings();
   private listeners: Set<() => void> = new Set();
+  private pendingTrack: BgmTrackId | null = null;
+  private interactionListenersAttached = false;
 
   getSettings(): Readonly<BgmSettings> { return this.settings; }
 
@@ -72,9 +74,33 @@ class BgmManager {
     try {
       await this.audio.play();
     } catch {
-      // Autoplay may be blocked — wait for user interaction
+      // Autoplay blocked — queue track and listen for first user interaction
+      this.pendingTrack = trackId;
+      this.attachInteractionListeners();
     }
     this.notify();
+  }
+
+  private attachInteractionListeners(): void {
+    if (this.interactionListenersAttached || typeof window === "undefined") return;
+    this.interactionListenersAttached = true;
+
+    const resume = () => {
+      if (this.pendingTrack && this.audio) {
+        this.audio.play().then(() => {
+          this.pendingTrack = null;
+          this.notify();
+        }).catch(() => {});
+      }
+      window.removeEventListener("pointerdown", resume);
+      window.removeEventListener("keydown", resume);
+      window.removeEventListener("touchstart", resume);
+      this.interactionListenersAttached = false;
+    };
+
+    window.addEventListener("pointerdown", resume, { once: true });
+    window.addEventListener("keydown", resume, { once: true });
+    window.addEventListener("touchstart", resume, { once: true });
   }
 
   stop(): void {

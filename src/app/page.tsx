@@ -6,6 +6,7 @@ import { usePlayerStore } from "@/stores/playerStore";
 import { loadGame, saveGame } from "@/features/save/saveManager";
 import { bgm, pickTrackForContext } from "@/features/audio/bgmManager";
 import BgmControl from "@/components/ui/BgmControl";
+import SplashScreen, { hasSeenSplash } from "@/components/ui/SplashScreen";
 
 const STAGES = [
   { id: 1, name: "녹색 골짜기", boss: false }, { id: 2, name: "어둠의 숲", boss: false },
@@ -25,6 +26,7 @@ const STAGES = [
 
 export default function Home() {
   const [loaded, setLoaded] = useState(false);
+  const [showSplash, setShowSplash] = useState(false);
   const sp = usePlayerStore((s) => s.starPoints);
   const gems = usePlayerStore((s) => s.gems);
   const difficulty = usePlayerStore((s) => s.difficulty);
@@ -35,6 +37,8 @@ export default function Home() {
   useEffect(() => {
     loadGame();
     setLoaded(true);
+    // Only show splash once per session
+    setShowSplash(!hasSeenSplash());
     // Start menu BGM
     bgm.play(pickTrackForContext({ type: "menu" }));
   }, []);
@@ -51,6 +55,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-950 text-white">
+      {showSplash && <SplashScreen onFinished={() => setShowSplash(false)} />}
       <div className="max-w-6xl mx-auto py-6 px-4">
         <div className="text-center mb-4">
           <h1 className="text-5xl font-bold mb-1 text-yellow-400">타워 디펜스</h1>

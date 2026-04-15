@@ -18,12 +18,12 @@ export default function InGameSettings() {
   const sfxSettings = sfx.getSettings();
 
   return (
-    <div className="absolute top-2 right-28 z-10">
+    <div className="absolute top-16 right-24 z-10">
       <button
         onClick={() => setOpen(!open)}
         className="px-2 py-1 bg-gray-800/90 hover:bg-gray-700 rounded border border-gray-600 text-xs font-bold"
       >
-        {open ? "✕" : "⚙ 설정"}
+        {open ? "✕ 닫기" : "⚙ 설정"}
       </button>
 
       {open && (

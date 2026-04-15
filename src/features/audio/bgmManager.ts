@@ -144,22 +144,23 @@ class BgmManager {
 
 export const bgm = new BgmManager();
 
-/** Pick a BGM track based on stage + type (menu, normal, boss) */
+/** Pick a random BGM track based on context (menu, normal, boss) */
 export function pickTrackForContext(ctx: {
   type: "menu" | "normal" | "boss";
   stageId?: number;
 }): BgmTrackId {
   if (ctx.type === "menu") return "WhenTheMorningComes";
+
   if (ctx.type === "boss") {
-    // Boss stages get darker tracks
     const bossTracks: BgmTrackId[] = ["Nightmare", "DragonNest", "BadGuys"];
-    return bossTracks[(ctx.stageId ?? 0) % bossTracks.length];
+    return bossTracks[Math.floor(Math.random() * bossTracks.length)];
   }
-  // Normal stages — rotate through light tracks
+
+  // Normal stages — random light tracks
   const normalTracks: BgmTrackId[] = [
     "AboveTheTreetops", "FloralLife", "Aquarium", "LetsMarch",
     "Leafre", "ShininHarbor", "MuruengHill", "SnowyVillage",
     "FantasticThinking",
   ];
-  return normalTracks[(ctx.stageId ?? 0) % normalTracks.length];
+  return normalTracks[Math.floor(Math.random() * normalTracks.length)];
 }

@@ -1,0 +1,234 @@
+{
+  "archer": {
+    "id": "archer",
+    "name": "궁수 타워",
+    "description": "기본 원거리 물리 공격 타워",
+    "baseCost": 100,
+    "damageType": "physical",
+    "baseAttack": 15,
+    "baseAttackSpeed": 1.0,
+    "baseRange": 150,
+    "splashRadius": 0,
+    "specialEffect": "none",
+    "upgrades": {
+      "path1": [
+        { "name": "속사", "cost": 150, "attackBonus": 5, "speedBonus": 0.3, "rangeBonus": 0, "specialEffect": "rapid_fire" },
+        { "name": "속사 II", "cost": 300, "attackBonus": 10, "speedBonus": 0.5, "rangeBonus": 0, "specialEffect": "rapid_fire_2" },
+        { "name": "머신건", "cost": 600, "attackBonus": 15, "speedBonus": 1.0, "rangeBonus": 20, "specialEffect": "machine_gun" }
+      ],
+      "path2": [
+        { "name": "관통", "cost": 200, "attackBonus": 10, "speedBonus": 0, "rangeBonus": 20, "specialEffect": "pierce_1" },
+        { "name": "관통 II", "cost": 400, "attackBonus": 20, "speedBonus": 0, "rangeBonus": 40, "specialEffect": "pierce_2" },
+        { "name": "저격수", "cost": 800, "attackBonus": 40, "speedBonus": -0.3, "rangeBonus": 80, "specialEffect": "sniper" }
+      ],
+      "path3": [
+        { "name": "치명타", "cost": 200, "attackBonus": 20, "speedBonus": 0, "rangeBonus": 0, "specialEffect": "crit_10" },
+        { "name": "치명타 II", "cost": 400, "attackBonus": 30, "speedBonus": 0, "rangeBonus": 0, "specialEffect": "crit_20" },
+        { "name": "암살자", "cost": 800, "attackBonus": 50, "speedBonus": 0, "rangeBonus": 0, "specialEffect": "crit_30_250" }
+      ]
+    }
+  },
+  "mage": {
+    "id": "mage",
+    "name": "마법사 타워",
+    "description": "마법 데미지를 가하는 원거리 타워",
+    "baseCost": 150,
+    "damageType": "magic",
+    "baseAttack": 25,
+    "baseAttackSpeed": 0.7,
+    "baseRange": 130,
+    "splashRadius": 0,
+    "specialEffect": "none",
+    "upgrades": {
+      "path1": [
+        { "name": "화염구", "cost": 200, "attackBonus": 15, "speedBonus": 0, "rangeBonus": 0, "specialEffect": "fireball_splash_30" },
+        { "name": "화염구 II", "cost": 450, "attackBonus": 25, "speedBonus": 0, "rangeBonus": 0, "specialEffect": "fireball_splash_50" },
+        { "name": "메테오", "cost": 900, "attackBonus": 50, "speedBonus": 0, "rangeBonus": 20, "specialEffect": "meteor_splash_80" }
+      ],
+      "path2": [
+        { "name": "연쇄 번개", "cost": 250, "attackBonus": 10, "speedBonus": 0.1, "rangeBonus": 10, "specialEffect": "chain_2" },
+        { "name": "연쇄 번개 II", "cost": 500, "attackBonus": 20, "speedBonus": 0.2, "rangeBonus": 20, "specialEffect": "chain_3" },
+        { "name": "뇌신", "cost": 1000, "attackBonus": 35, "speedBonus": 0.3, "rangeBonus": 30, "specialEffect": "chain_5" }
+      ],
+      "path3": [
+        { "name": "시간 감속", "cost": 200, "attackBonus": 5, "speedBonus": 0, "rangeBonus": 0, "specialEffect": "slow_20" },
+        { "name": "시간 정지", "cost": 500, "attackBonus": 10, "speedBonus": 0, "rangeBonus": 10, "specialEffect": "stun_1s" },
+        { "name": "시간의 지배자", "cost": 1000, "attackBonus": 15, "speedBonus": 0, "rangeBonus": 20, "specialEffect": "stun_2s_aoe" }
+      ]
+    }
+  },
+  "cannon": {
+    "id": "cannon",
+    "name": "대포 타워",
+    "description": "범위 물리 데미지를 가하는 폭발 타워",
+    "baseCost": 200,
+    "damageType": "physical",
+    "baseAttack": 40,
+    "baseAttackSpeed": 0.5,
+    "baseRange": 120,
+    "splashRadius": 40,
+    "specialEffect": "splash",
+    "upgrades": {
+      "path1": [
+        { "name": "대구경", "cost": 250, "attackBonus": 25, "speedBonus": 0, "rangeBonus": 0, "specialEffect": "big_splash_60" },
+        { "name": "대구경 II", "cost": 550, "attackBonus": 40, "speedBonus": 0, "rangeBonus": 10, "specialEffect": "big_splash_80" },
+        { "name": "요새포", "cost": 1100, "attackBonus": 80, "speedBonus": 0.1, "rangeBonus": 20, "specialEffect": "fortress_splash_100" }
+      ],
+      "path2": [
+        { "name": "네이팜", "cost": 300, "attackBonus": 10, "speedBonus": 0, "rangeBonus": 0, "specialEffect": "burn_3s" },
+        { "name": "네이팜 II", "cost": 600, "attackBonus": 20, "speedBonus": 0, "rangeBonus": 0, "specialEffect": "burn_5s" },
+        { "name": "지옥불", "cost": 1200, "attackBonus": 30, "speedBonus": 0, "rangeBonus": 10, "specialEffect": "burn_8s_aoe" }
+      ],
+      "path3": [
+        { "name": "지진", "cost": 250, "attackBonus": 15, "speedBonus": 0, "rangeBonus": 0, "specialEffect": "stun_05s" },
+        { "name": "지진 II", "cost": 550, "attackBonus": 25, "speedBonus": 0, "rangeBonus": 0, "specialEffect": "stun_1s_slow" },
+        { "name": "대지의 분노", "cost": 1100, "attackBonus": 50, "speedBonus": 0, "rangeBonus": 0, "specialEffect": "stun_2s_slow_aoe" }
+      ]
+    }
+  },
+  "frost": {
+    "id": "frost",
+    "name": "냉기 타워",
+    "description": "적을 감속시키는 얼음 타워",
+    "baseCost": 175,
+    "damageType": "ice",
+    "baseAttack": 10,
+    "baseAttackSpeed": 0.8,
+    "baseRange": 140,
+    "splashRadius": 0,
+    "specialEffect": "slow_30",
+    "upgrades": {
+      "path1": [
+        { "name": "눈보라", "cost": 200, "attackBonus": 8, "speedBonus": 0, "rangeBonus": 0, "specialEffect": "blizzard_splash_40_slow_40" },
+        { "name": "눈보라 II", "cost": 450, "attackBonus": 15, "speedBonus": 0.1, "rangeBonus": 10, "specialEffect": "blizzard_splash_60_slow_50" },
+        { "name": "대한파", "cost": 900, "attackBonus": 25, "speedBonus": 0.2, "rangeBonus": 20, "specialEffect": "blizzard_splash_80_slow_60" }
+      ],
+      "path2": [
+        { "name": "빙벽", "cost": 200, "attackBonus": 5, "speedBonus": 0, "rangeBonus": 10, "specialEffect": "freeze_chance_10" },
+        { "name": "빙벽 II", "cost": 450, "attackBonus": 10, "speedBonus": 0, "rangeBonus": 15, "specialEffect": "freeze_chance_20" },
+        { "name": "빙하 감옥", "cost": 900, "attackBonus": 15, "speedBonus": 0, "rangeBonus": 20, "specialEffect": "freeze_chance_35" }
+      ],
+      "path3": [
+        { "name": "냉기 오라", "cost": 250, "attackBonus": 5, "speedBonus": 0, "rangeBonus": 20, "specialEffect": "slow_aura_20" },
+        { "name": "냉기 오라 II", "cost": 500, "attackBonus": 10, "speedBonus": 0, "rangeBonus": 30, "specialEffect": "slow_aura_35" },
+        { "name": "절대영도", "cost": 1000, "attackBonus": 15, "speedBonus": 0, "rangeBonus": 40, "specialEffect": "slow_aura_50_freeze" }
+      ]
+    }
+  },
+  "poison": {
+    "id": "poison",
+    "name": "독 타워",
+    "description": "지속 독 데미지를 가하는 타워",
+    "baseCost": 150,
+    "damageType": "poison",
+    "baseAttack": 8,
+    "baseAttackSpeed": 0.6,
+    "baseRange": 130,
+    "splashRadius": 30,
+    "specialEffect": "dot_3s",
+    "upgrades": {
+      "path1": [
+        { "name": "맹독", "cost": 200, "attackBonus": 6, "speedBonus": 0, "rangeBonus": 0, "specialEffect": "dot_5s" },
+        { "name": "맹독 II", "cost": 400, "attackBonus": 12, "speedBonus": 0, "rangeBonus": 0, "specialEffect": "dot_8s" },
+        { "name": "치명독", "cost": 800, "attackBonus": 20, "speedBonus": 0.1, "rangeBonus": 10, "specialEffect": "dot_12s_stack" }
+      ],
+      "path2": [
+        { "name": "전염", "cost": 250, "attackBonus": 4, "speedBonus": 0, "rangeBonus": 10, "specialEffect": "plague_spread_1" },
+        { "name": "전염 II", "cost": 500, "attackBonus": 8, "speedBonus": 0, "rangeBonus": 15, "specialEffect": "plague_spread_2" },
+        { "name": "대역병", "cost": 1000, "attackBonus": 12, "speedBonus": 0, "rangeBonus": 20, "specialEffect": "plague_spread_4" }
+      ],
+      "path3": [
+        { "name": "부식", "cost": 200, "attackBonus": 5, "speedBonus": 0, "rangeBonus": 0, "specialEffect": "armor_reduce_10" },
+        { "name": "부식 II", "cost": 450, "attackBonus": 10, "speedBonus": 0, "rangeBonus": 0, "specialEffect": "armor_reduce_25" },
+        { "name": "용해", "cost": 900, "attackBonus": 15, "speedBonus": 0, "rangeBonus": 10, "specialEffect": "armor_reduce_50" }
+      ]
+    }
+  },
+  "tesla": {
+    "id": "tesla",
+    "name": "테슬라 타워",
+    "description": "연쇄 번개를 발사하는 전기 타워",
+    "baseCost": 225,
+    "damageType": "lightning",
+    "baseAttack": 20,
+    "baseAttackSpeed": 0.9,
+    "baseRange": 140,
+    "splashRadius": 0,
+    "specialEffect": "chain_lightning_2",
+    "upgrades": {
+      "path1": [
+        { "name": "과충전", "cost": 300, "attackBonus": 15, "speedBonus": 0.1, "rangeBonus": 0, "specialEffect": "overcharge_1" },
+        { "name": "과충전 II", "cost": 600, "attackBonus": 30, "speedBonus": 0.2, "rangeBonus": 10, "specialEffect": "overcharge_2" },
+        { "name": "메가볼트", "cost": 1200, "attackBonus": 50, "speedBonus": 0.3, "rangeBonus": 20, "specialEffect": "overcharge_3" }
+      ],
+      "path2": [
+        { "name": "전자기 펄스", "cost": 250, "attackBonus": 10, "speedBonus": 0, "rangeBonus": 10, "specialEffect": "emp_stun_05s" },
+        { "name": "전자기 펄스 II", "cost": 550, "attackBonus": 15, "speedBonus": 0, "rangeBonus": 15, "specialEffect": "emp_stun_1s" },
+        { "name": "EMP 폭발", "cost": 1100, "attackBonus": 25, "speedBonus": 0, "rangeBonus": 20, "specialEffect": "emp_stun_2s_aoe" }
+      ],
+      "path3": [
+        { "name": "연쇄 강화", "cost": 250, "attackBonus": 10, "speedBonus": 0, "rangeBonus": 10, "specialEffect": "chain_lightning_3" },
+        { "name": "연쇄 강화 II", "cost": 500, "attackBonus": 15, "speedBonus": 0.1, "rangeBonus": 15, "specialEffect": "chain_lightning_5" },
+        { "name": "번개 폭풍", "cost": 1000, "attackBonus": 25, "speedBonus": 0.2, "rangeBonus": 20, "specialEffect": "chain_lightning_8" }
+      ]
+    }
+  },
+  "bomb": {
+    "id": "bomb",
+    "name": "폭탄 타워",
+    "description": "넓은 범위에 대규모 물리 폭발 데미지를 가하는 타워",
+    "baseCost": 175,
+    "damageType": "physical",
+    "baseAttack": 50,
+    "baseAttackSpeed": 0.3,
+    "baseRange": 110,
+    "splashRadius": 60,
+    "specialEffect": "splash",
+    "upgrades": {
+      "path1": [
+        { "name": "대형 폭탄", "cost": 250, "attackBonus": 30, "speedBonus": 0, "rangeBonus": 0, "specialEffect": "big_bomb_splash_80" },
+        { "name": "대형 폭탄 II", "cost": 550, "attackBonus": 50, "speedBonus": 0, "rangeBonus": 10, "specialEffect": "big_bomb_splash_100" },
+        { "name": "핵폭탄", "cost": 1100, "attackBonus": 80, "speedBonus": 0.05, "rangeBonus": 15, "specialEffect": "mega_bomb_splash_120" }
+      ],
+      "path2": [
+        { "name": "지뢰", "cost": 200, "attackBonus": 20, "speedBonus": 0, "rangeBonus": 0, "specialEffect": "mine_trap_1" },
+        { "name": "지뢰 II", "cost": 450, "attackBonus": 35, "speedBonus": 0, "rangeBonus": 0, "specialEffect": "mine_trap_2" },
+        { "name": "지뢰밭", "cost": 900, "attackBonus": 50, "speedBonus": 0, "rangeBonus": 10, "specialEffect": "mine_field_3" }
+      ],
+      "path3": [
+        { "name": "확산탄", "cost": 250, "attackBonus": 15, "speedBonus": 0, "rangeBonus": 0, "specialEffect": "cluster_2" },
+        { "name": "확산탄 II", "cost": 500, "attackBonus": 25, "speedBonus": 0, "rangeBonus": 0, "specialEffect": "cluster_3" },
+        { "name": "융단폭격", "cost": 1000, "attackBonus": 40, "speedBonus": 0.05, "rangeBonus": 10, "specialEffect": "cluster_5" }
+      ]
+    }
+  },
+  "support": {
+    "id": "support",
+    "name": "지원 타워",
+    "description": "주변 타워를 강화하는 지원 타워",
+    "baseCost": 125,
+    "damageType": "physical",
+    "baseAttack": 0,
+    "baseAttackSpeed": 0,
+    "baseRange": 160,
+    "splashRadius": 0,
+    "specialEffect": "buff_aura",
+    "upgrades": {
+      "path1": [
+        { "name": "전투 고무", "cost": 200, "attackBonus": 0, "speedBonus": 0, "rangeBonus": 0, "specialEffect": "buff_speed_10" },
+        { "name": "전투 고무 II", "cost": 450, "attackBonus": 0, "speedBonus": 0, "rangeBonus": 10, "specialEffect": "buff_speed_20" },
+        { "name": "광전사", "cost": 900, "attackBonus": 0, "speedBonus": 0, "rangeBonus": 20, "specialEffect": "buff_speed_35" }
+      ],
+      "path2": [
+        { "name": "정찰", "cost": 200, "attackBonus": 0, "speedBonus": 0, "rangeBonus": 10, "specialEffect": "buff_range_10" },
+        { "name": "정찰 II", "cost": 400, "attackBonus": 0, "speedBonus": 0, "rangeBonus": 15, "specialEffect": "buff_range_20" },
+        { "name": "전략 지휘", "cost": 800, "attackBonus": 0, "speedBonus": 0, "rangeBonus": 25, "specialEffect": "buff_range_35" }
+      ],
+      "path3": [
+        { "name": "약탈", "cost": 200, "attackBonus": 0, "speedBonus": 0, "rangeBonus": 0, "specialEffect": "gold_bonus_5" },
+        { "name": "약탈 II", "cost": 450, "attackBonus": 0, "speedBonus": 0, "rangeBonus": 0, "specialEffect": "gold_bonus_10" },
+        { "name": "황금 시대", "cost": 900, "attackBonus": 0, "speedBonus": 0, "rangeBonus": 10, "specialEffect": "gold_bonus_20" }
+      ]
+    }
+  }
+}

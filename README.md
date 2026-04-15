@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 타워 디펜스 | Pixel Art Edition
 
-## Getting Started
+Next.js + PixiJS + TypeScript 기반 본격 픽셀아트 타워 디펜스 웹 게임
 
-First, run the development server:
+## 게임 특징
+
+- **25개 스테이지** + **무한 모드**
+- **8종 타워** (궁수/마법사/대포/냉기/독/테슬라/폭탄/지원)
+- **18종 적** (일반 15 + 보스 5 — 오크치프/레드드래곤/리치킹/악마군주/혼돈황제)
+- **24종 스킬** (공격/경제/방어/히든)
+- **12종 무기** + 강화 시스템 (최대 +10, 확률 기반)
+- **영구 강화 시스템** (23종 업그레이드)
+- **업적 시스템** (15종)
+- **3단계 난이도** (쉽게/보통/어렵게)
+- **키보드 단축키** (1-8 타워, QWER/ASD 스킬)
+- **13트랙 BGM** + 프로그래매틱 효과음
+
+## 기술 스택
+
+- **Framework**: Next.js 16 (App Router)
+- **Game Engine**: PixiJS 8
+- **Language**: TypeScript (strict mode)
+- **State Management**: Zustand
+- **Styling**: Tailwind CSS
+- **Audio**: Web Audio API (SFX) + HTMLAudioElement (BGM)
+
+## 로컬 개발
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 빌드
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+npm start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 조작법
 
-## Learn More
+| 입력 | 동작 |
+|------|------|
+| `1-8` | 타워 선택 |
+| `Q W E R` `A S D` | 액티브 스킬 |
+| `Space` | 일시정지 / 재개 |
+| `Esc` | 선택 해제 |
+| 그리드 클릭 | 선택한 타워 배치 |
+| 설치된 타워 클릭 | 업그레이드 / 판매 패널 열기 |
 
-To learn more about Next.js, take a look at the following resources:
+## 라이선스
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+개인 프로젝트 (비상업)

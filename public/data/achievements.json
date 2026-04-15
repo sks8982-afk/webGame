@@ -1,0 +1,17 @@
+{
+  "first_kill": { "id": "first_kill", "name": "첫 처치", "description": "적 1마리 처치", "condition": { "type": "kills", "value": 1 }, "reward": { "sp": 10, "gems": 0 } },
+  "hundred_kills": { "id": "hundred_kills", "name": "사냥꾼", "description": "적 100마리 처치", "condition": { "type": "kills", "value": 100 }, "reward": { "sp": 50, "gems": 5 } },
+  "thousand_kills": { "id": "thousand_kills", "name": "학살자", "description": "적 1000마리 처치", "condition": { "type": "kills", "value": 1000 }, "reward": { "sp": 200, "gems": 20 } },
+  "first_stage": { "id": "first_stage", "name": "첫 승리", "description": "스테이지 1 클리어", "condition": { "type": "stage_clear", "value": 1 }, "reward": { "sp": 20, "gems": 0 } },
+  "clear_10": { "id": "clear_10", "name": "중반 돌파", "description": "스테이지 10 클리어", "condition": { "type": "stage_clear", "value": 10 }, "reward": { "sp": 100, "gems": 30 } },
+  "clear_all": { "id": "clear_all", "name": "정복자", "description": "스테이지 25 클리어", "condition": { "type": "stage_clear", "value": 25 }, "reward": { "sp": 500, "gems": 200 } },
+  "three_star_5": { "id": "three_star_5", "name": "완벽주의자", "description": "스테이지 5개 3성 클리어", "condition": { "type": "three_star_count", "value": 5 }, "reward": { "sp": 100, "gems": 10 } },
+  "three_star_15": { "id": "three_star_15", "name": "숙련가", "description": "스테이지 15개 3성 클리어", "condition": { "type": "three_star_count", "value": 15 }, "reward": { "sp": 300, "gems": 50 } },
+  "boss_slayer": { "id": "boss_slayer", "name": "보스 슬레이어", "description": "보스 3종 클리어", "condition": { "type": "boss_clears", "value": 3 }, "reward": { "sp": 150, "gems": 30 } },
+  "weapon_collector": { "id": "weapon_collector", "name": "무기 수집가", "description": "무기 5개 보유", "condition": { "type": "weapons_owned", "value": 5 }, "reward": { "sp": 80, "gems": 10 } },
+  "enhance_plus5": { "id": "enhance_plus5", "name": "대장장이", "description": "무기 +5 강화", "condition": { "type": "max_enhance", "value": 5 }, "reward": { "sp": 100, "gems": 20 } },
+  "enhance_plus10": { "id": "enhance_plus10", "name": "전설의 대장장이", "description": "무기 +10 강화", "condition": { "type": "max_enhance", "value": 10 }, "reward": { "sp": 500, "gems": 100 } },
+  "skill_master": { "id": "skill_master", "name": "스킬 마스터", "description": "스킬 10개 습득", "condition": { "type": "skills_learned", "value": 10 }, "reward": { "sp": 150, "gems": 20 } },
+  "rich": { "id": "rich", "name": "부자", "description": "SP 5000 도달", "condition": { "type": "sp_reached", "value": 5000 }, "reward": { "sp": 0, "gems": 100 } },
+  "endless_50": { "id": "endless_50", "name": "불굴", "description": "무한모드 웨이브 50 도달", "condition": { "type": "endless_wave", "value": 50 }, "reward": { "sp": 200, "gems": 50 } }
+}

@@ -1,65 +1,134 @@
-import Image from "next/image";
+"use client";
+
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { usePlayerStore } from "@/stores/playerStore";
+import { loadGame, saveGame } from "@/features/save/saveManager";
+import { bgm, pickTrackForContext } from "@/features/audio/bgmManager";
+import BgmControl from "@/components/ui/BgmControl";
+
+const STAGES = [
+  { id: 1, name: "녹색 골짜기", boss: false }, { id: 2, name: "어둠의 숲", boss: false },
+  { id: 3, name: "산길", boss: false }, { id: 4, name: "저주받은 늪", boss: false },
+  { id: 5, name: "오크 요새", boss: true }, { id: 6, name: "얼어붙은 호수", boss: false },
+  { id: 7, name: "유령의 묘지", boss: false }, { id: 8, name: "수정 동굴", boss: false },
+  { id: 9, name: "드래곤 고갯길", boss: false }, { id: 10, name: "드래곤의 둥지", boss: true },
+  { id: 11, name: "그림자 숲", boss: false }, { id: 12, name: "언데드 늪지", boss: false },
+  { id: 13, name: "화산 분화구", boss: false }, { id: 14, name: "얼음 왕좌", boss: false },
+  { id: 15, name: "리치왕의 영지", boss: true }, { id: 16, name: "사막 관문", boss: false },
+  { id: 17, name: "황금 사원", boss: false }, { id: 18, name: "수정 숲", boss: false },
+  { id: 19, name: "천공의 다리", boss: false }, { id: 20, name: "드래곤 로드의 둥지", boss: true },
+  { id: 21, name: "어둠의 탑", boss: false }, { id: 22, name: "폐허의 성", boss: false },
+  { id: 23, name: "망자의 계곡", boss: false }, { id: 24, name: "차원의 틈", boss: false },
+  { id: 25, name: "혼돈 황제의 영역", boss: true },
+];
 
 export default function Home() {
+  const [loaded, setLoaded] = useState(false);
+  const sp = usePlayerStore((s) => s.starPoints);
+  const gems = usePlayerStore((s) => s.gems);
+  const difficulty = usePlayerStore((s) => s.difficulty);
+  const setDifficulty = usePlayerStore((s) => s.setDifficulty);
+  const getStageStars = usePlayerStore((s) => s.getStageStars);
+  const stageProgress = usePlayerStore((s) => s.stageProgress);
+
+  useEffect(() => {
+    loadGame();
+    setLoaded(true);
+    // Start menu BGM
+    bgm.play(pickTrackForContext({ type: "menu" }));
+  }, []);
+
+  const isUnlocked = (id: number): boolean =>
+    id === 1 || stageProgress.some((p) => p.stageId === id - 1 && p.cleared);
+
+  if (!loaded) return null;
+
+  const changeDifficulty = (d: "easy" | "normal" | "hard") => {
+    setDifficulty(d);
+    saveGame();
+  };
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="min-h-screen bg-gray-950 text-white">
+      <div className="max-w-6xl mx-auto py-6 px-4">
+        <div className="text-center mb-4">
+          <h1 className="text-5xl font-bold mb-1 text-yellow-400">타워 디펜스</h1>
+          <p className="text-gray-500 text-sm">픽셀 아트 에디션</p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <div className="flex justify-center gap-2 mb-4 flex-wrap">
+          <div className="px-3 py-1.5 bg-gray-800 rounded-lg text-sm"><span className="text-gray-400">SP </span><span className="text-yellow-300 font-bold">{sp}</span></div>
+          <div className="px-3 py-1.5 bg-gray-800 rounded-lg text-sm"><span className="text-gray-400">보석 </span><span className="text-cyan-300 font-bold">{gems}</span></div>
+          <Link href="/shop" className="px-3 py-1.5 bg-purple-700 hover:bg-purple-600 rounded-lg text-sm font-bold">상점</Link>
+          <Link href="/skills" className="px-3 py-1.5 bg-indigo-700 hover:bg-indigo-600 rounded-lg text-sm font-bold">스킬</Link>
+          <Link href="/upgrades" className="px-3 py-1.5 bg-pink-700 hover:bg-pink-600 rounded-lg text-sm font-bold">영구 강화</Link>
+          <Link href="/achievements" className="px-3 py-1.5 bg-amber-700 hover:bg-amber-600 rounded-lg text-sm font-bold">업적 & 통계</Link>
+          <BgmControl />
         </div>
-      </main>
+
+        {/* Difficulty selector */}
+        <div className="flex justify-center gap-2 mb-5">
+          {(["easy", "normal", "hard"] as const).map((d) => (
+            <button
+              key={d}
+              onClick={() => changeDifficulty(d)}
+              className={`px-4 py-1.5 rounded-lg text-sm font-bold border-2 ${
+                difficulty === d
+                  ? d === "easy" ? "border-green-400 bg-green-900/40 text-green-300"
+                  : d === "normal" ? "border-blue-400 bg-blue-900/40 text-blue-300"
+                  : "border-red-400 bg-red-900/40 text-red-300"
+                  : "border-gray-700 text-gray-400 hover:border-gray-500"
+              }`}
+            >{d === "easy" ? "쉽게" : d === "normal" ? "보통" : "어렵게"}</button>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-5 gap-2 mb-6">
+          {STAGES.map((stage) => {
+            const stars = getStageStars(stage.id);
+            const unlocked = isUnlocked(stage.id);
+            return (
+              <div key={stage.id}>
+                {unlocked ? (
+                  <Link
+                    href={`/game?stage=${stage.id}`}
+                    className={`block p-2 rounded-lg text-center transition-all hover:scale-105 ${
+                      stage.boss ? "bg-red-900/80 border-2 border-red-600 hover:bg-red-800" :
+                      "bg-gray-800 border-2 border-gray-700 hover:border-gray-500"
+                    }`}
+                  >
+                    <div className="text-xl font-bold">{stage.id}</div>
+                    <div className="text-[9px] text-gray-400 truncate">{stage.name}</div>
+                    {stage.boss && <div className="text-[9px] text-red-400 font-bold">보스</div>}
+                    <div className="text-yellow-400 text-[10px] mt-0.5">
+                      {stars > 0 ? "★".repeat(stars) + "☆".repeat(3 - stars) : "—"}
+                    </div>
+                  </Link>
+                ) : (
+                  <div className="p-2 rounded-lg text-center bg-gray-900 border-2 border-gray-800 opacity-40">
+                    <div className="text-xl font-bold text-gray-600">{stage.id}</div>
+                    <div className="text-[9px] text-gray-600">잠김</div>
+                    <div className="text-gray-700 text-xs">🔒</div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="p-3 bg-gray-800/50 rounded-lg border border-gray-700 text-xs">
+          <h3 className="text-sm font-bold text-gray-400 mb-2">게임 조작</h3>
+          <div className="grid grid-cols-3 gap-1 text-gray-400">
+            <div><kbd className="text-yellow-300">1-8</kbd> 타워 선택</div>
+            <div><kbd className="text-yellow-300">Q W E R A S D</kbd> 액티브 스킬</div>
+            <div><kbd className="text-yellow-300">Space</kbd> 일시정지</div>
+            <div><kbd className="text-yellow-300">Esc</kbd> 선택 해제</div>
+            <div>경로 클릭: 선택한 타워 배치</div>
+            <div>설치된 타워 클릭: 업그레이드/판매</div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
